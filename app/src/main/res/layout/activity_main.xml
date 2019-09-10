@@ -18,12 +18,12 @@
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/categoryListView"
             app:layout_constraintVertical_bias="0.783"/>
     <ListView
-            android:layout_width="254dp"
+            android:layout_width="0dp"
             android:layout_height="541dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:layout_marginBottom="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/categoryListView"
+            android:divider="@null"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
