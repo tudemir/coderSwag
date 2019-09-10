@@ -22,18 +22,18 @@ object DataService {
     )
 
     val hoodies = listOf(
-        Product("Hoodie Gray","$28","hoodie01"),
-        Product("Hoodie Red","$32","hoodie02"),
-        Product("Hoodie Gr","$28","hoodie03"),
-        Product("Black Hoodie","$32","hoodie04")
+            Product("Hoodie Gray","$28","hoodie01"),
+            Product("Hoodie Red","$32","hoodie02"),
+            Product("Hoodie Gr","$28","hoodie03"),
+            Product("Black Hoodie","$32","hoodie04")
     )
 
     val shirts = listOf(
-        Product("Shirt Black","$18","shirt01"),
-        Product("Badge Light Gray","$20","shirt02"),
-        Product("Logo Shirt Red","$22","shirt03"),
-        Product("Hustle","$22","shirt04"),
-        Product("Kickflip Studios","$18","shirt05")
+            Product("Shirt Black","$18","shirt01"),
+            Product("Badge Light Gray","$20","shirt02"),
+            Product("Logo Shirt Red","$22","shirt03"),
+            Product("Hustle","$22","shirt04"),
+            Product("Kickflip Studios","$18","shirt05")
     )
 
 }
