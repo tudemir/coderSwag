@@ -1,11 +1,13 @@
 package com.tudemir.coderswag.Controller
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.Toast
 import com.tudemir.coderswag.R
 import com.tudemir.coderswag.Services.DataService
+import com.tudemir.coderswag.Utilities.EXTRA_CATEGORY
 import com.tudemir.coderswag.adapters.CategoryAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,7 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         categoryListView.setOnItemClickListener { adapterView, view, i, l ->
             val category = DataService.categories[i]
-            Toast.makeText(this,"You clicked on ${category.title}", Toast.LENGTH_SHORT).show()
+            val productIntent = Intent(this,ProductActivity::class.java)
+            productIntent.putExtra(EXTRA_CATEGORY,category.title)
+            startActivity(productIntent)
 
         }
 
