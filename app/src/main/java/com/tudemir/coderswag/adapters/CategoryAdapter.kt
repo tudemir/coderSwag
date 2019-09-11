@@ -1,60 +1,46 @@
 package com.tudemir.coderswag.adapters
 
 import android.content.Context
+import android.database.sqlite.SQLiteMisuseException
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.tudemir.coderswag.Model.Category
 import com.tudemir.coderswag.R
-
-class CategoryAdapter(context: Context, categories:List<Category>) : BaseAdapter() {
-
-    val context = context
-    val categories = categories
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val categoryView:View
-        val holder: ViewHolder
-        //First time the view is constructed
-        if(convertView == null){
-            categoryView= LayoutInflater.from(context).inflate(R.layout.category_list_item, null)
-            holder = ViewHolder()
-            holder.categoryImage = categoryView.findViewById(R.id.categoryImage)
-            holder.categoryName = categoryView.findViewById(R.id.categoryName)
-            categoryView.tag = holder
-        } else {
-            holder = convertView.tag as ViewHolder
-            categoryView = convertView
-        }
+import com.tudemir.coderswag.Services.DataService
+import kotlinx.android.synthetic.main.category_list_item.view.*
 
 
-        val category = categories[position]
-
-        //Convert image names to resource id
-        val resourceId = context.resources.getIdentifier(category.image,"drawable", context.packageName)
-        holder.categoryImage?.setImageResource(resourceId)
-        holder.categoryName?.text = category.title
-
-        return categoryView
+class CategoryAdapter(val context: Context, val categories:List<Category>, val itemClick: (Category) -> Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.category_list_item,parent,false)
+        return CategoryHolder(view,itemClick)
     }
 
-    override fun getItem(position: Int): Any {
-        return categories[position]
-     }
-    //Unique id for each row
-    override fun getItemId(position: Int): Long {
-        return 0
-     }
-
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return categories.count()
     }
 
-    //Holds reference to our category image and name
-    private class ViewHolder {
-        var categoryImage:ImageView?=null
-        var categoryName:TextView?=null
+    override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
+        holder.bindCategory(categories[position],context)
     }
+
+
+    inner class CategoryHolder(itemView:View, val itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView){
+        val categoryImage = itemView.findViewById<ImageView>(R.id.categoryImage)
+        val categoryName = itemView.findViewById<TextView>(R.id.categoryName)
+
+        fun bindCategory(category:Category, context: Context){
+            val resourceId = context.resources.getIdentifier(category.image,"drawable",context.packageName)
+            categoryImage.setImageResource(resourceId)
+            categoryName.text = category.title
+            itemView.setOnClickListener {  itemClick(category) }
+        }
+    }
+
+
 }

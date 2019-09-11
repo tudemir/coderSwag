@@ -3,8 +3,7 @@ package com.tudemir.coderswag.Controller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tudemir.coderswag.R
 import com.tudemir.coderswag.Services.DataService
 import com.tudemir.coderswag.Utilities.EXTRA_CATEGORY
@@ -20,17 +19,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         adapter = CategoryAdapter(this,
-                DataService.categories)
-
-        categoryListView.adapter = adapter
-
-        categoryListView.setOnItemClickListener { adapterView, view, i, l ->
-            val category = DataService.categories[i]
+                DataService.categories){ category ->
             val productIntent = Intent(this,ProductActivity::class.java)
             productIntent.putExtra(EXTRA_CATEGORY,category.title)
             startActivity(productIntent)
 
         }
+
+        val layoutManager = LinearLayoutManager(this)
+        categoryListView.layoutManager = layoutManager
+        categoryListView.adapter = adapter
+        categoryListView.setHasFixedSize(true)
+
+
 
     }
 }
