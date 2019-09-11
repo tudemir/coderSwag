@@ -17,7 +17,7 @@
             android:id="@+id/textView"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/productListView"
             app:layout_constraintVertical_bias="0.783"/>
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="541dp"
             app:layout_constraintStart_toStartOf="parent"
